@@ -9,6 +9,7 @@ app.get('/ads', (request, response) => {
         { id: 3, name: 'Anúncio 3'},
         { id: 4, name: 'Anúncio 4'},
         { id: 5, name: 'Anúncio 5'},
+        { id: 6, name: 'Anúncio 6'},
     ])
 }) //request é a requisição que nós vamos pegar, no caso do anuncio, podemos pegar qual é o jogo, o tempo jogado e outros. E o response serva para devolver uma resposta
    
