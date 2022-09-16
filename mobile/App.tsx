@@ -19,9 +19,9 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>
-        Você me desculpa amor da minha vida?
+        NWL eSports
       </Text>
-      <Button title="DIZ QUE SIM"/>
+      <Button title="Clique"/>
       <StatusBar style="auto" />
     </View>
   );
