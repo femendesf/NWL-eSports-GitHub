@@ -1,0 +1,1 @@
+declare module  '*.png' // definido tipagem para todo arquivo com extensão PNG
