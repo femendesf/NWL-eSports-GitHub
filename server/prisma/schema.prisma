@@ -10,25 +10,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Game{
-
-  id  String @id // @id vai pegar esse id como chave primaria da tabela
-  title String
+model Game {
+  id        String @id // @id vai pegar esse id como chave primaria da tabela
+  title     String
   bannerUrl String
 
+  ads        Ad[]// No banco de dados não vai existir um campp ads, o Prisma cria somente para saber que ele existe
 }
 
-model Ad{
-  
-  id String @id
-  name String
-  yearsPlaying Int
-  discord String
-  weekDays String
-  hourStart Int
-  hourEnd Int
+model Ad {
+  id              String   @id
+  gameId          String
+  name            String
+  yearsPlaying    Int
+  discord         String
+  weekDays        String
+  hourStart       Int
+  hourEnd         Int
   useVoiceChannel Boolean
-  createdAt DateTime @default(now()) // @default vai salvar por padrão o momento atual que o registro for criado
+  createdAt       DateTime @default(now()) // @default vai salvar por padrão o momento atual que o registro for criado
 
+  game Game @relation(fields: [gameId], references: [id]) // Relação da tabela Ad com Game, para varios anuncios em cada jogo
 }
-
