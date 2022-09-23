@@ -44,37 +44,120 @@ Os principais HTTP CODES são os que começam com:
     - Recomendado para informações sensiveis, como cadastrar ou mudar senha
  */
 
-import express, { request, response } from "express";
+/* Async/Await:
+    Usamos para quando queremos que primeiro seja executado uma instrução.
+    Adicionar 'async' na função que esta por volta da instrução que queremos que seja executada, e adicionamos 'await' antes da instrução.
+*/
+
+
+import express, { query, request, response } from "express";
+import {PrismaClient} from '@prisma/client'
+import { convertHourStringToMinutes } from "./utils/convert-hour-strinh-to-minutes";
 
 const app = express()
+const prisma = new PrismaClient({
 
+    log:['query']
+});
 
-app.get('/games', (request, response) => {return response.json([])}) //Rota para listar os games.
+app.use(express.json()) // Por padrão o Express não entende informação no formato de JSON, com esse código esta fazendo com que ele entenda :).
 
-app.post('/ads', (request, response) => {return response.status(201).json([])})// Rota para criar anuncios.
-//Por mais que o endereço '/ads' possa ser o mesmo da outra rota, vai ser diferente por conta do método. Como usamos métodos diferentes, não precisamos criar um nome diferente na rota.
- 
-app.get('/game/:id/ads', (request, response) => { // Rota para acessar os anuncios do game.
+app.post('/games/:id/ads', async (request, response) => {
 
     /*
-        Caso queira retornar o parâmetro que foi definido: 
-        const gameId= request.params.id;
-
-        return response.send(gameID);
+        Body / Request:
+        Vai ser usado o Body porque esta sendo passado várias informações, e algumas pode ser sensiveis.
     */
+    const gameId = request.params.id;
+    const body: any = request.body;
 
-    return response.json([
-        { id: 1, name: 'Anúncio 1'},
-        { id: 2, name: 'Anúncio 2'},
-        { id: 3, name: 'Anúncio 3'},
-        { id: 4, name: 'Anúncio 4'},
-        { id: 5, name: 'Anúncio 5'},
-        { id: 6, name: 'Anúncio 6'},
-    ])
+    const ad = await prisma.ad.create({
+        data: {
+            gameId,
+            name: body.name,
+            yearsPlaying: body.yearsPlaying,
+            discord: body.discord,
+            weekDays: body.weekDays.join(","),
+            hourStart: convertHourStringToMinutes(body.hourStart),
+            hourEnd: convertHourStringToMinutes(body.hourEnd),
+            useVoiceChannel: body.useVoiceChannel,
+        }
+    })
+
+    return response.status(201).json(ad)
+
+})// Rota para criar anuncios.
+//Por mais que o endereço '/ads' possa ser o mesmo da outra rota, vai ser diferente por conta do método. Como usamos métodos diferentes, não precisamos criar um nome diferente na rota.
+
+
+app.get('/games', async (request, response) => {
+    
+    const games = await prisma.game.findMany({
+        include:{
+            _count:{
+                select:{
+                    ads:true
+                }
+            }
+        }
+    }) 
+    /*Instrução para encontrar todos os jogos na tabela do banco de dados.
+    Pode passar um objeto de configuração dentro do nosso findMany, no caso estamos usando um pra mostrar a contagem dos anuncios*/ 
+
+    return response.json(games)
+
+});//Rota para listar os games.
+
+
+app.get('/games/:id/ads', async(request, response) => { // Rota para acessar os anuncios do game.
+
+    const gameId = request.params.id // Retorna o parametro id que esta vindo da URL
+    
+    const ads = await prisma.ad.findMany({ // Intrução retorna os anuncios do game especifico
+        select:{
+            id: true,
+            name: true,
+            weekDays: true,
+            useVoiceChannel: true,
+            yearsPlaying: true,
+            hourStart: true,
+            hourEnd: true
+        },
+
+        where:{
+            gameId
+        },
+
+        orderBy:{
+            createdAt: 'desc'
+        }
+    })
+
+    return response.json(ads.map(ad => {
+        return {
+            ...ad,
+            weekDays: ad.weekDays.split(',') //Formatação do retorno dos dias da semana
+        }
+    }))
 }) //request é a requisição que vamos pegar. No caso do anuncio podemos pegar qual é o jogo, o tempo jogado e outros. E o response serve para devolver uma resposta
 
-app.get('/add/:id/discord', (request, response) => {
-    return response.json([])
+
+app.get('/add/:id/discord', async (request, response) => {
+    const AdID = request.params.id
+
+    const ad = await prisma.ad.findUniqueOrThrow({
+        select:{
+            discord: true
+        },
+
+        where:{
+            id: AdID
+        }
+    })
+    return response.json({
+        discord: ad.discord
+    })
 }) // Rota para buscar o Discord pelo ID do anúncio.
+
 
 app.listen(3333)

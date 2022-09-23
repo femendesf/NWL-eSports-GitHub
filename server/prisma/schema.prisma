@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Game {
-  id        String @id // @id vai pegar esse id como chave primaria da tabela
+  id        String @id  @default(uuid())// @id vai pegar esse id como chave primaria da tabela
   title     String
   bannerUrl String
 
@@ -19,7 +19,7 @@ model Game {
 }
 
 model Ad {
-  id              String   @id
+  id              String   @id @default(uuid()) // Usando gerador UUID para gerar um id padrão 
   gameId          String
   name            String
   yearsPlaying    Int
