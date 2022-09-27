@@ -11,15 +11,14 @@ datasource db {
 }
 
 model Game {
-  id        String @id  @default(uuid())// @id vai pegar esse id como chave primaria da tabela
+  id        String @id @default(uuid())
   title     String
   bannerUrl String
-
-  ads        Ad[]// No banco de dados não vai existir um campp ads, o Prisma cria somente para saber que ele existe
+  ads       Ad[]
 }
 
 model Ad {
-  id              String   @id @default(uuid()) // Usando gerador UUID para gerar um id padrão 
+  id              String   @id @default(uuid())
   gameId          String
   name            String
   yearsPlaying    Int
@@ -28,7 +27,7 @@ model Ad {
   hourStart       Int
   hourEnd         Int
   useVoiceChannel Boolean
-  createdAt       DateTime @default(now()) // @default vai salvar por padrão o momento atual que o registro for criado
+  createdAt       DateTime @default(now())
 
-  game Game @relation(fields: [gameId], references: [id]) // Relação da tabela Ad com Game, para varios anuncios em cada jogo
+  game Game @relation(fields: [gameId], references: [id])
 }
