@@ -1,13 +1,13 @@
 export const GAMES = [
   {
     id: '1',
-    name: 'League of Legends',
+    name: 'Grand Theft Auto',
     ads: '4',
     cover: require('../assets/games/game-1.png')
   },
   {
     id: '2',
-    name: 'Dota 2',
+    name: 'God of War',
     ads: '3',
     cover: require('../assets/games/game-2.png')
   },
@@ -19,7 +19,7 @@ export const GAMES = [
   },
   {
     id: '4',
-    name: 'Apex',
+    name: 'FIFA 22',
     ads: '3',
     cover: require('../assets/games/game-4.png')
   },
@@ -31,7 +31,7 @@ export const GAMES = [
   },
   {
     id: '6',
-    name: 'World of Warcraft',
+    name: 'Minecraft',
     ads: '2',
     cover: require('../assets/games/game-6.png')
   },

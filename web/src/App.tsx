@@ -19,7 +19,7 @@ function App() {
             
           <div className='absolute bottom-0 left-0 right-0 bg-game-gradient w-full pt-16 pb-4 px-4'>
      
-            <strong className='text-white block font-bold'>League of Legends</strong>
+            <strong className='text-white block font-bold'>Grand Theft Auto V</strong>
             <span className='text-zinc-300 text-sm block'>4 anúncios</span>
 
           </div>
@@ -31,7 +31,7 @@ function App() {
 
             <div className='absolute bottom-0 left-0 right-0 bg-game-gradient w-full pt-16 pb-4 px-4'>
 
-            <strong className='text-white block font-bold'>Dota 2</strong>
+            <strong className='text-white block font-bold'>God of War</strong>
             <span className='text-zinc-300 text-sm block'>4 anúncios</span>
 
           </div>
@@ -55,7 +55,7 @@ function App() {
 
           <div className='absolute bottom-0 left-0 right-0 bg-game-gradient w-full pt-16 pb-4 px-4'>
 
-            <strong className='text-white block font-bold'>Apex</strong>
+            <strong className='text-white block font-bold'>FIFA 22</strong>
             <span className='text-zinc-300 text-sm block'>4 anúncios</span>
 
           </div>
@@ -74,7 +74,7 @@ function App() {
         <a href=""className='relative rounded-lg overflow-hidden '>
           <img src="/game-6.png" alt="" />
             <div className='absolute bottom-0 left-0 right-0 bg-game-gradient w-full pt-16 pb-4 px-4'>
-              <strong className='text-white block font-bold'>World War Craft</strong>
+              <strong className='text-white block font-bold'>Minecraft</strong>
               <span className='text-zinc-300 text-sm block'>4 anúncios</span>
             </div>
         </a>

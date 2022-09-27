@@ -10,7 +10,8 @@ const prisma = new PrismaClient({
 })
 
 
-app.use(express.json()) // Linha para express entender requisição JSON
+app.use(express.json()) // Linha para express entender requisição JS
+
 app.use(cors())
 
 
