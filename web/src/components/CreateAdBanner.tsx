@@ -14,7 +14,8 @@ export function CreateAdBanner(){
           </div>
 
           <Dialog.DialogTrigger className='bg-violet-500 px-4 py-3 hover:bg-violet-600 text-white rounded flex items-center gap-3'>
-            <MagnifyingGlassPlus size={24}/>
+            <MagnifyingGlassPlus size={24} // ícone da lupa ao lado de 'Publicar anuncio'
+            />
             Publicar anúncio
           </Dialog.DialogTrigger>
 

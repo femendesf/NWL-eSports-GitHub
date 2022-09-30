@@ -1,6 +1,8 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Input } from "./Input";
-import {GameController, MagnifyingGlassPlus} from 'phosphor-react'
+import {Check, GameController, MagnifyingGlassPlus} from 'phosphor-react'
+import * as Checkbox from '@radix-ui/react-checkbox'
+import * as Select from '@radix-ui/react-select';
 
 export function CreateAdModal(){
 
@@ -18,7 +20,6 @@ export function CreateAdModal(){
             <div className='flex flex-col gap-2'>
 
               <label className='font-semibold' htmlFor="game">Qual o game?</label>
-              <Input id='game' placeholder='Selecione o game que desja jogar'/>
 
             </div>
 
@@ -66,11 +67,13 @@ export function CreateAdModal(){
             </div>
 
 
-            <div className='mt-2 flex gap-2 text-sm'>
-
-              <Input type="checkbox"/>
+            <div className='mt-2 flex gap-2 text-sm items-center'>
+              <Checkbox.Root className="w-6 h-6 p-1 rounded bg-zinc-900">
+                <Checkbox.Indicator>
+                  <Check className="w-4 h-4 text-emerald-400" />
+                </Checkbox.Indicator>
+              </Checkbox.Root>
               Costumo me conectar ao chat de voz
-
             </div>
 
 
