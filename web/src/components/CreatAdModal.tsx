@@ -1,10 +1,29 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { Input } from "./Input";
+import { Input } from "./Form/Input";
 import {Check, GameController, MagnifyingGlassPlus} from 'phosphor-react'
 import * as Checkbox from '@radix-ui/react-checkbox'
 import * as Select from '@radix-ui/react-select';
+import { useEffect, useState } from "react";
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 
+interface Game{
+  id: string,
+  title: string
+}
 export function CreateAdModal(){
+
+  const [games, setGames] = useState<Game[]>([]) // 
+
+
+  useEffect( () => {
+
+    fetch('http://localhost:3333/games')
+      .then(response => response.json())
+      .then(data =>{
+        setGames(data) 
+      })
+
+  }, [])
 
   return (
     <Dialog.Portal>
@@ -15,11 +34,46 @@ export function CreateAdModal(){
 
         <Dialog.Title className='text-3xl font-black'>Publique um anúncio</Dialog.Title>
 
-          <form className='mt-8 flex flex-col gap-4'>
+          <form className='mt-8 flex flex-col gap-4 '>
 
             <div className='flex flex-col gap-2'>
 
-              <label className='font-semibold' htmlFor="game">Qual o game?</label>
+              <label className='font-semibold' htmlFor="game">Qual o game?
+              </label>
+
+              <Select.Root >
+           
+                <Select.Trigger className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 justify-center content-between inline-flex gap">
+                  <Select.Value  placeholder="Selecione um jogo">
+                    
+                  </Select.Value>
+                  <Select.Icon>
+                    <ChevronDownIcon></ChevronDownIcon>
+                  </Select.Icon>
+                  </Select.Trigger>
+
+                  <Select.Content >
+                    <Select.Viewport>
+
+                      {games.map(game => {
+                        return <Select.Item 
+                        key={game.id } 
+                        value={game.id} 
+                        className="bg-slate-700 rounded flex items-center pr-9 pl-6 h-6 relative hover:bg-gray-800 ">
+              
+                          <Select.ItemText>{game.title}</Select.ItemText>
+
+                          <Select.ItemIndicator>
+                            <CheckIcon></CheckIcon>
+                          </Select.ItemIndicator>
+
+                        </Select.Item>
+                      })}
+                    </Select.Viewport>
+                  </Select.Content>
+
+                
+              </Select.Root>
 
             </div>
 
@@ -99,3 +153,14 @@ export function CreateAdModal(){
   )
     
 }
+
+/*<select 
+                id="game"
+                className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500"
+              >
+                <option disabled selected value="">Selecione o game que deseja jogar</option>
+
+                {games.map(game => {
+                  return <option key={game.id} value={game.id}>{game.title}</option>
+                })}
+              </select>*/
