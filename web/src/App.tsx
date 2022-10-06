@@ -6,6 +6,7 @@ import { CreateAdModal} from './components/CreatAdModal';
 import './styles/main.css';
 import logoImg from './assets/logo-nlw-esports.svg';
 import { CreateAdBanner } from './components/CreateAdBanner';
+import axios from 'axios';
 
 
 
@@ -25,10 +26,9 @@ function App() {
 
   useEffect( () => {
 
-    fetch('http://localhost:3333/games') // Busca na API o local onde está a lista de jogos.
-      .then(response => response.json())
-      .then(data =>{
-        setGames(data) // Chamando função para atualizar o estado da lista de games com os dados recebidos da API.
+    axios('http://localhost:3333/games') // Busca na API o local onde está a lista de jogos.
+      .then(response =>{
+        setGames(response.data) // Chamando função para atualizar o estado da lista de games com os dados recebidos da API.
       })
 
   }, [])
