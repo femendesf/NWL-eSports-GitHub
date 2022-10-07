@@ -16,6 +16,7 @@ import {Entypo} from '@expo/vector-icons'
 import { THEME } from '../../theme';
 import logoImg from '../../assets/logo-nlw-esports.png'
 import { DuoCard, DuoCardProps } from '../../components/DuoCard';
+import { DuoMatch } from '../../components/DuoMatch';
 
 
 
@@ -32,7 +33,7 @@ export function Game() {
   }
 
   useEffect(()=> {
-    fetch(`http://192.168.15.8:3333/games/${game.id}/ads`)
+    fetch(`http://192.168.15.11:3333/games/${game.id}/ads`)
     .then(response=> response.json())
     .then(data=> {setDuos(data)})
 
@@ -90,6 +91,13 @@ export function Game() {
               )}
             />
             
+            <DuoMatch
+              
+              visible={true}
+              discord=''
+            />
+
+
         </SafeAreaView>
     </Background>
     
