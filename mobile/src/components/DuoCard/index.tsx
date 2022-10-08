@@ -13,6 +13,7 @@ export interface DuoCardProps{
   hourEnd: string,
   hourStart: string,
   name: string,
+  discord: string
   useVoiceChannel: boolean,
   weekDays: string[],
   yearsPlaying: number
@@ -20,7 +21,7 @@ export interface DuoCardProps{
 
 interface  Props {
     data: DuoCardProps,
-    onConnect: () => void
+    onConnect: () => void;
 }
 
 export function DuoCard({data, onConnect}: Props) {

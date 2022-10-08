@@ -1,5 +1,6 @@
 import { StatusBar } from "react-native";
-import { Background } from "./src/components/Background";
+
+
 import {
   useFonts,
   Inter_400Regular,
@@ -10,6 +11,9 @@ import {
 
 import { Loading } from "./src/components/Loading";
 import { Routes } from "./src/routes";
+import { Background } from "./src/components/Background";
+
+import "../mobile/src/services/notificationConfigs"
 
 
 export default function App() {

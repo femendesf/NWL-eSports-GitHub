@@ -19,10 +19,11 @@ import { DuoCard, DuoCardProps } from '../../components/DuoCard';
 import { DuoMatch } from '../../components/DuoMatch';
 
 
-
 export function Game() {
 
   const [duos, setDuos] = useState<DuoCardProps[]>([])
+
+  const [discordDuoSelected, setDiscordDuoSelected] = useState('')
 
   const route = useRoute()
   const game = route.params as GameParams;
@@ -30,6 +31,12 @@ export function Game() {
   const navigation = useNavigation()
   function handleGoBack() {
     navigation.goBack()
+  }
+
+  async function getDiscordUser(adsId: string){
+    fetch(`http://192.168.15.11:3333/ads/${adsId}/discord`)
+    .then(response=> response.json())
+    .then(data=> setDiscordDuoSelected(data.discord))
   }
 
   useEffect(()=> {
@@ -44,7 +51,9 @@ export function Game() {
         <SafeAreaView style={styles.container}>
 
             <View style={styles.header}>
+
                 <TouchableOpacity onPress={handleGoBack}>
+
                     <Entypo // Icone de ( < )
                       name='chevron-thin-left'
                       color={THEME.COLORS.CAPTION_300}
@@ -52,7 +61,7 @@ export function Game() {
                     />
                 </TouchableOpacity>
 
-                <Image
+                <Image // LOGO
                   source={logoImg}
                   style={styles.logo}
                 />
@@ -66,7 +75,7 @@ export function Game() {
               resizeMode='contain'
             />
             
-            <Heading
+            <Heading // Texto
               title={game.title}
               subtitle='Conecte-se e comece a jogar!'
             />
@@ -77,12 +86,14 @@ export function Game() {
               renderItem={({item}) => (
                 <DuoCard 
                 data={item}
-                onConnect={() => {}}
+                onConnect={() => {getDiscordUser(item.id)}}
                 />
               )}
               horizontal
               style={styles.containerList}
+
               contentContainerStyle={duos.length > 0 ? styles.contentList : styles.emptyListContent} // Verificação se há conteudo e estilização para cada
+              
               showsHorizontalScrollIndicator={false}
               ListEmptyComponent={()=> ( // Mensagem para caso a lista esteja vazia
                 <Text style={styles.emptyListText}>
@@ -92,9 +103,9 @@ export function Game() {
             />
             
             <DuoMatch
-              
-              visible={true}
-              discord=''
+              visible={discordDuoSelected.length > 0}
+              discord={discordDuoSelected}
+              onClose={() => setDiscordDuoSelected('')}
             />
 
 
