@@ -19,7 +19,7 @@ export function Home() {
   const [games, setGames]= useState<GameCardProps[]>([])
 
   useEffect(()=>{
-    fetch("http://192.168.15.11:3333/games")
+    fetch("http://192.168.15.15:3333/games")
     .then(response => response.json())
     .then(data => setGames(data))
   }, [])
