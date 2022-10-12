@@ -1,3 +1,5 @@
+
+
 interface GameBannerProps{
     bannerUrl: string,
     title: string,
