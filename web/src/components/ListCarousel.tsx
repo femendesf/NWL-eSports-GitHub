@@ -32,8 +32,8 @@ export function ListCarousel(){
         mode: "free-snap",
         slides: {
             origin: "center",
-            perView: 2,
-            spacing: 1,
+            perView: 3,
+            spacing: 10,
             
             
     },
@@ -42,13 +42,13 @@ export function ListCarousel(){
 
     return (
 
-        <div ref={sliderRef} className="keen-slider">  
+        <div ref={sliderRef} className="keen-slider mx-4 flow-root">  
 
          {games.map(game => {
 
              return(
  
-                 <div key={game.id} className="keen-slider__slide bg-slate-50 mt-6 flex justify-center">
+                 <div key={game.id} className="keen-slider__slide  mt-6 flex justify-center max-w-[%100]">
                     <GameBanner 
                     key={game.id} // Propriedade para o React identificar cada jogo e fazer atualização caso seja excluido, para não ter que recriar toda a lista novamente.
                     bannerUrl={game.bannerUrl} 
