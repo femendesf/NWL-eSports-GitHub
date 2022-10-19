@@ -3,7 +3,8 @@ import 'keen-slider/keen-slider.min.css'
 import { useKeenSlider } from 'keen-slider/react'
 import axios from 'axios'
 import { GameBanner } from './GameBanner'
-
+import { createRoot } from 'react-dom/client'
+import { List } from 'phosphor-react'
 
 interface Game{
     id: string,
@@ -28,33 +29,34 @@ export function ListCarousel(){
     
     }, []);
     
-    const [sliderRef] = useKeenSlider({
+  
+    const [sliderRef] = useKeenSlider<HTMLDivElement>({
         mode: "free-snap",
         slides: {
             origin: "center",
             perView: 3,
             spacing: 10,
-            
-            
-    },
-      
+        },
+      created: (() => {true})
     })
 
     return (
-
-        <div ref={sliderRef} className="keen-slider mx-4 flow-root">  
-
+        
+        <div ref={sliderRef} className="keen-slider mx-4 mt-6" >  
+      
          {games.map(game => {
-
+      
              return(
- 
-                 <div key={game.id} className="keen-slider__slide  mt-6 flex justify-center max-w-[%100]">
+                  
+                 <div key={game.id} className="keen-slider__slide  flex" >
+
                     <GameBanner 
                     key={game.id} // Propriedade para o React identificar cada jogo e fazer atualização caso seja excluido, para não ter que recriar toda a lista novamente.
                     bannerUrl={game.bannerUrl} 
                     title={game.title} 
                     adsCount={game._count.ads}
                     />
+                    
                   </div>
 
                )
