@@ -1,12 +1,16 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { Input } from "./Form/Input";
-import {Check, GameController, MagnifyingGlassPlus} from 'phosphor-react'
 import * as Checkbox from '@radix-ui/react-checkbox'
-import * as Select from '@radix-ui/react-select';
-import { useEffect, useState, FormEvent } from "react";
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon} from '@radix-ui/react-icons';
+import {Check, GameController, MagnifyingGlassPlus} from 'phosphor-react'
+import * as Select from '@radix-ui/react-select';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
+
+import { Input } from "./Form/Input";
 import axios from "axios";
+import { useEffect, useState, FormEvent } from "react";
+
+import {useForm} from 'react-hook-form'
+
 
 interface Game{
   id: string,
@@ -18,6 +22,8 @@ export function CreateAdModal(){
   const [weekDays, setWeekDays] = useState<string[]>([])
   const [useVoiceChannel, setVoiceChannel] = useState(false) 
   const [gameSelected, setSelectGame] = useState<string>()
+  
+  const {register, handleSubmit} = useForm()
 
   useEffect( () => {
 
@@ -75,7 +81,7 @@ export function CreateAdModal(){
               <label className='font-semibold' htmlFor="game">Qual o game?
               </label>
 
-              <Select.Root value={gameSelected} onValueChange={setSelectGame}>
+              <Select.Root value={gameSelected} onValueChange={setSelectGame} {...register("selectRoot")}>
            
                 <Select.Trigger className="bg-zinc-900 py-3 px-4 rounded text-sm justify-between inline-flex">
                   <Select.Value 
@@ -129,7 +135,7 @@ export function CreateAdModal(){
             <div className='flex flex-col gap-2'>
 
               <label htmlFor="name">Seu nome (ou nickname)</label>
-              <Input name='name' id="name" placeholder='Como te chamam dentro do game?'/>
+              <Input  id="name" placeholder='Como te chamam dentro do game?' {...register("name")}/>
 
             </div>
 
@@ -137,12 +143,12 @@ export function CreateAdModal(){
 
               <div className='flex flex-col gap 2'>
                 <label htmlFor="yearsPlaying"> Joga há quantos anos?</label>
-                <Input name="yearsPlaying" id='yearsPlaying' type="number" placeholder='Tudo bem ser ZERO'/>
+                <Input id='yearsPlaying' type="number" placeholder='Tudo bem ser ZERO' {...register("yearsPlaying")}/>
               </div>
 
               <div className='flex flex-col gap 2'>
                  <label htmlFor="discord">Qual seu Discord?</label>
-                <Input name="discord" id='discord' type="text" placeholder='Usuário#0000' />
+                <Input id='discord' type="text" placeholder='Usuário#0000' {...register("discord")} />
               </div>
 
             </div>
@@ -160,7 +166,7 @@ export function CreateAdModal(){
                     className="grid grid-cols-4 gap-2"
                     value={weekDays}
                     onValueChange={setWeekDays}
-
+                    {...register("weekDays")}
                     >
 
                       <ToggleGroup.Item
@@ -229,8 +235,8 @@ export function CreateAdModal(){
                 <label htmlFor="hourStart">Qual horário do dia?</label>
 
                   <div className='grid grid-cols-2 gap-2'>
-                    <Input name="hourStart" type="time" id="hourStart" placeholder='De'/>
-                    <Input name="hourEnd" type="time" id="hourEnd" placeholder='Até'/>
+                    <Input type="time" id="hourStart" placeholder='De' {...register("hourStart")}/>
+                    <Input type="time" id="hourEnd" placeholder='Até'{...register("hourEnd")}/>
 
                   </div>
               </div>
