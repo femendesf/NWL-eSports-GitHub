@@ -23,7 +23,8 @@ export function CreateAdModal(){
   const [useVoiceChannel, setVoiceChannel] = useState(false) 
   const [gameSelected, setSelectGame] = useState<string>()
   
-  const {register, handleSubmit} = useForm()
+  const {register, handleSubmit, formState: {errors}} = useForm()
+  console.log(errors)
 
   useEffect( () => {
 
@@ -57,10 +58,10 @@ export function CreateAdModal(){
       }
      ) 
 
-     alert('Anuncio criado com sucesso')
+     alert('Anúncio criado com sucesso')
     } catch (err){
       console.log(err)
-      alert('Erro ao criar anuncio')
+      alert(`Erro ${errors}`)
     }
     
   }
@@ -81,7 +82,7 @@ export function CreateAdModal(){
               <label className='font-semibold' htmlFor="game">Qual o game?
               </label>
 
-              <Select.Root value={gameSelected} onValueChange={setSelectGame} {...register("selectRoot")}>
+              <Select.Root value={gameSelected} onValueChange={setSelectGame} {...register("selectRoot", {required: true})}>
            
                 <Select.Trigger className="bg-zinc-900 py-3 px-4 rounded text-sm justify-between inline-flex">
                   <Select.Value 
@@ -135,7 +136,7 @@ export function CreateAdModal(){
             <div className='flex flex-col gap-2'>
 
               <label htmlFor="name">Seu nome (ou nickname)</label>
-              <Input  id="name" placeholder='Como te chamam dentro do game?' {...register("name")}/>
+              <Input  id="name" placeholder='Como te chamam dentro do game?' {...register("name", {required: true})}/>
 
             </div>
 
@@ -143,12 +144,12 @@ export function CreateAdModal(){
 
               <div className='flex flex-col gap 2'>
                 <label htmlFor="yearsPlaying"> Joga há quantos anos?</label>
-                <Input id='yearsPlaying' type="number" placeholder='Tudo bem ser ZERO' {...register("yearsPlaying")}/>
+                <Input id='yearsPlaying' type="number" placeholder='Tudo bem ser ZERO' {...register("yearsPlaying", {required: true})}/>
               </div>
 
               <div className='flex flex-col gap 2'>
                  <label htmlFor="discord">Qual seu Discord?</label>
-                <Input id='discord' type="text" placeholder='Usuário#0000' {...register("discord")} />
+                <Input id='discord' type="text" placeholder='Usuário#0000' {...register("discord", {required: true})} />
               </div>
 
             </div>
@@ -235,8 +236,8 @@ export function CreateAdModal(){
                 <label htmlFor="hourStart">Qual horário do dia?</label>
 
                   <div className='grid grid-cols-2 gap-2'>
-                    <Input type="time" id="hourStart" placeholder='De' {...register("hourStart")}/>
-                    <Input type="time" id="hourEnd" placeholder='Até'{...register("hourEnd")}/>
+                    <Input type="time" id="hourStart" placeholder='De' {...register("hourStart", {required: true})}/>
+                    <Input type="time" id="hourEnd" placeholder='Até'{...register("hourEnd" , {required: true} )}/>
 
                   </div>
               </div>
@@ -268,10 +269,10 @@ export function CreateAdModal(){
 
               <Dialog.Close className='bg-zinc-500 px-5 h-12 rounded-md font-semibold hover:bg-zinc-600'>Cancelar</Dialog.Close>
 
-              <button 
+              <button
               className='bg-violet-500 px-5 h-12 rounded-md font-semibold flex items-center gap-3 hover:bg-violet-600'
               type='submit'><GameController size={24}/> Encontrar duo</button>
-
+              
             </footer>
 
           </form>
