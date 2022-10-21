@@ -11,6 +11,8 @@ import { useEffect, useState, FormEvent } from "react";
 
 import {useForm} from 'react-hook-form'
 
+import { z } from "zod";
+import {zodResolver} from '@hookform/resolvers/zod'
 
 interface Game{
   id: string,
@@ -22,9 +24,22 @@ export function CreateAdModal(){
   const [weekDays, setWeekDays] = useState<string[]>([])
   const [useVoiceChannel, setVoiceChannel] = useState(false) 
   const [gameSelected, setSelectGame] = useState<string>()
+
   
-  const {register, handleSubmit, formState: {errors}} = useForm()
-  console.log(errors)
+  const schema = z.object({
+
+    name: z.string(),
+    yearsPlaying: z.number(),
+    discord: z.string(),
+    weekDays: z.number().array(),
+    hourStart: z.number(),
+    hourEnd: z.number(),
+
+  }).required()
+
+  const {register, formState: {errors}} = useForm({
+    resolver: zodResolver(schema)
+  })
 
   useEffect( () => {
 
@@ -41,29 +56,34 @@ export function CreateAdModal(){
     const formData = new FormData(event.target as HTMLFormElement)
     const data = Object.fromEntries(formData)
         
-   if(!data.name){
-       return 
-    }
     
-    try{
-     await axios.post(`http://localhost:3333/game/${gameSelected}/ads`,
-      {
-        name: data.name,
-        yearsPlaying: Number(data.yearsPlaying),
-        discord: data.discord,
-        weekDays: weekDays.map(Number),
-        hourStart: data.hourStart,
-        hourEnd: data.hourEnd,
-        useVoiceChannel: useVoiceChannel
-      }
-     ) 
+    console.log(errors)
 
-     alert('Anúncio criado com sucesso')
-    } catch (err){
-      console.log(err)
-      alert(`Erro ${errors}`)
-    }
-    
+    if(!data.name){
+        return 
+      }
+      
+      try{
+      await axios.post(`http://localhost:3333/game/${gameSelected}/ads`,
+        {
+          name: data.name,
+          yearsPlaying: Number(data.yearsPlaying),
+          discord: data.discord,
+          weekDays: weekDays.map(Number),
+          hourStart: data.hourStart,
+          hourEnd: data.hourEnd,
+          useVoiceChannel: useVoiceChannel
+        }
+      ) 
+
+      alert('Anúncio criado com sucesso')
+      
+      } catch (err){
+        console.log(err)
+        alert(`Erro ${errors}`)
+
+      }
+      
   }
  
   return (
@@ -130,6 +150,7 @@ export function CreateAdModal(){
                     </Select.Content>
                   </Select.Portal>
               </Select.Root>
+              <span></span>
 
             </div>
 
