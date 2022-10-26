@@ -18,6 +18,21 @@ interface Game{
   id: string,
   title: string
 }
+
+ const schema = z.object({
+
+    name: z.string().min(1, {message: 'Required'}),
+    yearsPlaying: z.number().int(),
+    discord: z.string(),
+    weekDays: z.number().array(),
+    hourStart: z.number().int(),
+    hourEnd: z.number().int(),
+
+  }).required()
+
+
+
+  
 export function CreateAdModal(){
 
   const [games, setGames] = useState<Game[]>([]) // 
@@ -25,19 +40,8 @@ export function CreateAdModal(){
   const [useVoiceChannel, setVoiceChannel] = useState(false) 
   const [gameSelected, setSelectGame] = useState<string>()
 
-  
-  const schema = z.object({
 
-    name: z.string(),
-    yearsPlaying: z.number(),
-    discord: z.string(),
-    weekDays: z.number().array(),
-    hourStart: z.number(),
-    hourEnd: z.number(),
-
-  }).required()
-
-  const {register, formState: {errors}} = useForm({
+  const {register, handleSubmit , formState: {errors}} = useForm({
     resolver: zodResolver(schema)
   })
 
@@ -50,40 +54,61 @@ export function CreateAdModal(){
 
   }, [])
 
+
+  
   async function handleCreateAd(event:  FormEvent){
     event.preventDefault() // Para prevenir o comportamento padrão.
     
     const formData = new FormData(event.target as HTMLFormElement)
     const data = Object.fromEntries(formData)
-        
+
     
-    console.log(errors)
+    console.log(data)
+  
 
-    if(!data.name){
-        return 
-      }
-      
+
+    /*if(!gameSelected){
+      alert("Selecione o jogo")
+    }
+    if(data.name == ""){
+      return alert("Preencha o campo NOME")
+    }
+    if(!data.yearsPlaying){
+      return alert("Preencha há quantos anos você joga")
+    }
+    if(!data.discord){
+      return alert ("Preencha o campo DISCORD")
+    }
+    if(data.weekDays < 0){
+      alert("QUANDO COSJUDFAMN")
+    }
+    if(!data.hourStart){
+      return alert ("Preencha o campo HORARIO QUE COMEÇA")
+    }
+    if(!data.hourEnd){
+      return alert ("Preencha o campo HORARIO QUE TERMINA")
+    }
+    */
+    
       try{
-      await axios.post(`http://localhost:3333/game/${gameSelected}/ads`,
-        {
-          name: data.name,
-          yearsPlaying: Number(data.yearsPlaying),
-          discord: data.discord,
-          weekDays: weekDays.map(Number),
-          hourStart: data.hourStart,
-          hourEnd: data.hourEnd,
-          useVoiceChannel: useVoiceChannel
-        }
-      ) 
+        await axios.post(`http://localhost:3333/game/${gameSelected}/ads`,
+          {
+            name: data.name,
+            yearsPlaying: Number(data.yearsPlaying),
+            discord: data.discord,
+            weekDays: weekDays.map(Number),
+            hourStart: data.hourStart,
+            hourEnd: data.hourEnd,
+            useVoiceChannel: useVoiceChannel
+          }
+        ) 
 
-      alert('Anúncio criado com sucesso')
-      
-      } catch (err){
-        console.log(err)
-        alert(`Erro ${errors}`)
-
-      }
-      
+        alert('Anúncio criado com sucesso')
+        
+        } catch (err){
+            console.log(err)
+            alert('Complete todos os campos')
+          }
   }
  
   return (
@@ -150,7 +175,7 @@ export function CreateAdModal(){
                     </Select.Content>
                   </Select.Portal>
               </Select.Root>
-              <span></span>
+              
 
             </div>
 
@@ -158,7 +183,7 @@ export function CreateAdModal(){
 
               <label htmlFor="name">Seu nome (ou nickname)</label>
               <Input  id="name" placeholder='Como te chamam dentro do game?' {...register("name", {required: true})}/>
-
+              
             </div>
 
             <div className='grid grid-cols-2 gap-6'>
@@ -166,11 +191,13 @@ export function CreateAdModal(){
               <div className='flex flex-col gap 2'>
                 <label htmlFor="yearsPlaying"> Joga há quantos anos?</label>
                 <Input id='yearsPlaying' type="number" placeholder='Tudo bem ser ZERO' {...register("yearsPlaying", {required: true})}/>
+                {errors.yearsPlaying && "Nome necessario"}
               </div>
 
               <div className='flex flex-col gap 2'>
                  <label htmlFor="discord">Qual seu Discord?</label>
                 <Input id='discord' type="text" placeholder='Usuário#0000' {...register("discord", {required: true})} />
+                {errors.discord && "Nome necessario"}
               </div>
 
             </div>
@@ -188,7 +215,8 @@ export function CreateAdModal(){
                     className="grid grid-cols-4 gap-2"
                     value={weekDays}
                     onValueChange={setWeekDays}
-                    {...register("weekDays")}
+                    {...register("weekDays", {required: true})}
+                    
                     >
 
                       <ToggleGroup.Item
