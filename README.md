@@ -7,10 +7,14 @@ Neste projeto foi desenvolvido uma página web, onde o usuario pode selecionar s
 ---
 
 ## Tecnologias
-* React (https://reactjs.org/)
-* React Native (https://reactnative.dev/)
-* TypeScript (https://www.typescriptlang.org/)
-* NodeJs (https://nodejs.org/en/)
+* React
+* React Native
+* TypeScript
+* NodeJs
+* JavaScript
+* HTML
+* CSS
+
 ---
 
 
@@ -27,6 +31,7 @@ Neste projeto foi desenvolvido uma página web, onde o usuario pode selecionar s
  * Radix (https://www.radix-ui.com/)
  * Keen Slider (https://keen-slider.io/)
  * PhophorIcons (https://phosphoricons.com/)
+ * Tailwindcss (https://tailwindcss.com/)
 ***
 
 ## _Mobile_ 📱 :
