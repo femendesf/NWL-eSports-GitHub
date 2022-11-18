@@ -29,9 +29,6 @@ interface Game{
     hourEnd: z.number().int(),
 
   }).required()
-
-
-
   
 export function CreateAdModal(){
 
@@ -65,31 +62,6 @@ export function CreateAdModal(){
     
     console.log(data)
   
-
-
-    /*if(!gameSelected){
-      alert("Selecione o jogo")
-    }
-    if(data.name == ""){
-      return alert("Preencha o campo NOME")
-    }
-    if(!data.yearsPlaying){
-      return alert("Preencha há quantos anos você joga")
-    }
-    if(!data.discord){
-      return alert ("Preencha o campo DISCORD")
-    }
-    if(data.weekDays < 0){
-      alert("QUANDO COSJUDFAMN")
-    }
-    if(!data.hourStart){
-      return alert ("Preencha o campo HORARIO QUE COMEÇA")
-    }
-    if(!data.hourEnd){
-      return alert ("Preencha o campo HORARIO QUE TERMINA")
-    }
-    */
-    
       try{
         await axios.post(`http://localhost:3333/game/${gameSelected}/ads`,
           {
@@ -326,8 +298,6 @@ export function CreateAdModal(){
 
           </form>
           
-       
-
       </Dialog.Content>
 
     </Dialog.Overlay>
@@ -336,14 +306,3 @@ export function CreateAdModal(){
   )
     
 }
-
-/*<select 
-                id="game"
-                className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500"
-              >
-                <option disabled selected value="">Selecione o game que deseja jogar</option>
-
-                {games.map(game => {
-                  return <option key={game.id} value={game.id}>{game.title}</option>
-                })}
-              </select>*/

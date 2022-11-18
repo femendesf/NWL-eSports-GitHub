@@ -3,8 +3,7 @@ import 'keen-slider/keen-slider.min.css'
 import { useKeenSlider } from 'keen-slider/react'
 import axios from 'axios'
 import { GameBanner } from './GameBanner'
-import { createRoot } from 'react-dom/client'
-import { List } from 'phosphor-react'
+
 
 interface Game{
     id: string,
@@ -14,7 +13,6 @@ interface Game{
       ads: number
     }
 }
-
 
 export function ListCarousel(){
 

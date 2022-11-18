@@ -2,15 +2,11 @@ import * as Dialog from '@radix-ui/react-dialog'
 
 import { CreateAdModal} from './components/CreatAdModal';
 
-
 import './styles/main.css';
 import logoImg from './assets/logo-nlw-esports.svg';
 import { CreateAdBanner } from './components/CreateAdBanner';
 
-
 import { ListCarousel } from './components/ListCarousel';
-
-
 
 
 interface Game{
@@ -37,7 +33,6 @@ function App() {
         Seu <span className='text-transparent bg-nlw-gradient bg-clip-text'>duo</span> está aqui.
       </h1>
         
-      
       <ListCarousel/>
     
       <Dialog.Root>
@@ -47,7 +42,6 @@ function App() {
         <CreateAdModal/>
 
       </Dialog.Root>
-      
       
     </div>
   )
