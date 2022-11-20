@@ -11,7 +11,6 @@ Neste projeto foi desenvolvido uma página web, onde o usuario pode selecionar s
 * React Native
 * TypeScript
 * NodeJs
-* JavaScript
 * HTML
 * CSS
 
