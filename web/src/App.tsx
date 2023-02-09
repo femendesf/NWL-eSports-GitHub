@@ -1,10 +1,11 @@
 import * as Dialog from '@radix-ui/react-dialog'
 
 import { CreateAdModal} from './components/CreatAdModal';
+import { CreateAdBanner } from './components/CreateAdBanner';
 
 import './styles/main.css';
+
 import logoImg from './assets/logo-nlw-esports.svg';
-import { CreateAdBanner } from './components/CreateAdBanner';
 
 import { ListCarousel } from './components/ListCarousel';
 
@@ -32,7 +33,8 @@ function App() {
       <h1 className='text-6xl text-white font-black mt-20'>
         Seu <span className='text-transparent bg-nlw-gradient bg-clip-text'>duo</span> está aqui.
       </h1>
-        
+
+    
       <ListCarousel/>
     
       <Dialog.Root>

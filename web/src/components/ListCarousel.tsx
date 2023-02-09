@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import 'keen-slider/keen-slider.min.css'
-import { useKeenSlider } from 'keen-slider/react'
+import { useKeenSlider} from 'keen-slider/react'
 import axios from 'axios'
 import { GameBanner } from './GameBanner'
 
@@ -14,7 +14,7 @@ interface Game{
     }
 }
 
-export function ListCarousel(){
+ export  function ListCarousel(){
 
     const [games, setGames] = useState<Game[]>([])// Estado da lista de games (vazia). Usando tipagem <Game> para definir quais são os formatos dos objetos.
 
@@ -25,7 +25,7 @@ export function ListCarousel(){
             setGames(response.data) // Chamando função para atualizar o estado da lista de games com os dados recebidos da API.
           })
     
-    }, []);
+    }, games);
     
   
     const [sliderRef] = useKeenSlider<HTMLDivElement>({
@@ -38,7 +38,8 @@ export function ListCarousel(){
       created: (() => {true})
     })
 
-    return (
+    if(games.length > 1){
+      return (
         
         <div ref={sliderRef} className="keen-slider mx-4 mt-6" >  
       
@@ -62,7 +63,10 @@ export function ListCarousel(){
            )}
     
         </div>
-    )
+       ) 
+    }
+    
+    
 
 
 
