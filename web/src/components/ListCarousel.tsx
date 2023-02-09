@@ -43,7 +43,8 @@ interface Game{
         
         <div ref={sliderRef} className="keen-slider mx-4 mt-6" >  
       
-         {games.map(game => {
+         {games &&
+           games.map(game => {
       
              return(
                   
