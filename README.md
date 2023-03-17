@@ -29,9 +29,6 @@ Neste projeto foi desenvolvido uma página web, onde o usuario pode selecionar s
 ### Instal project:
 `npm install`
 
-### Update Prisma:
-`npx prisma migrate dev`
-
 ### Start project:
 `npm run dev`
 
