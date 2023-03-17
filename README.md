@@ -18,10 +18,11 @@ Neste projeto foi desenvolvido uma página web, onde o usuario pode selecionar s
 
 ---
 
-
 ## _Web_ 💻 :
 <img src="github\Landing.png" alt="Página Home Web" />
 <img src="github\pub-anuncio.png" alt="Página Publicar Anúncio"/>
+
+---
 
 ### **Tools** 🔧:
 
@@ -35,6 +36,16 @@ Neste projeto foi desenvolvido uma página web, onde o usuario pode selecionar s
  * [PhophorIcons](https://phosphoricons.com/)
  * [Tailwindcss](https://tailwindcss.com/)
 ***
+### Access project:
+`cd web`
+
+### Instal project:
+`npm install`
+
+### Start project:
+`npm run dev`
+
+---
 
 ## _Mobile_ 📱 :
 
@@ -44,9 +55,32 @@ Neste projeto foi desenvolvido uma página web, onde o usuario pode selecionar s
  * [Expo](https://expo.dev/)
  * [PhophorIcons](https://phosphoricons.com/)
 
+---
+
+### Access project:
+`cd mobile`
+
+### Instal project:
+`npm install`
+
+### Start project:
+`npm run dev`
+---
+
 ***
 
 ## _Server_ :
  * [SQLite3](https://www.npmjs.com/package/sqlite3)
  * [Prisma](https://www.prisma.io/)
+
+ ---
+ ### Access project:
+`cd server`
+
+### Instal project:
+`npm install`
+
+### Start project:
+`npm run dev`
+---
  
