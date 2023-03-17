@@ -18,6 +18,25 @@ Neste projeto foi desenvolvido uma página web, onde o usuario pode selecionar s
 
 ---
 
+## _Server_ :
+ * [SQLite3](https://www.npmjs.com/package/sqlite3)
+ * [Prisma](https://www.prisma.io/)
+
+ ---
+ ### Access project:
+`cd server`
+
+### Instal project:
+`npm install`
+
+### Update Prisma:
+`npx prisma migrate dev`
+
+### Start project:
+`npm run dev`
+
+---
+
 ## _Web_ 💻 :
 <img src="github\Landing.png" alt="Página Home Web" />
 <img src="github\pub-anuncio.png" alt="Página Publicar Anúncio"/>
@@ -69,18 +88,4 @@ Neste projeto foi desenvolvido uma página web, onde o usuario pode selecionar s
 
 ***
 
-## _Server_ :
- * [SQLite3](https://www.npmjs.com/package/sqlite3)
- * [Prisma](https://www.prisma.io/)
-
- ---
- ### Access project:
-`cd server`
-
-### Instal project:
-`npm install`
-
-### Start project:
-`npm run dev`
----
  
