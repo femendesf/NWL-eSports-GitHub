@@ -30,7 +30,7 @@ Neste projeto foi desenvolvido uma página web, onde o usuario pode selecionar s
 `npm install`
 
 ### Start project:
-`npm run dev`
+run server: `npm run dev`
 
 ---
 
@@ -59,7 +59,7 @@ Neste projeto foi desenvolvido uma página web, onde o usuario pode selecionar s
 `npm install`
 
 ### Start project:
-`npm run dev`
+Run Vite : `npm run dev`
 
 ---
 
